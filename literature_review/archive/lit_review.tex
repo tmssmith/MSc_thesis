@@ -1,0 +1,218 @@
+\documentclass[11pt, parskip=half*,twoside=false]{scrbook}
+\usepackage{todonotes}
+\usepackage{natbib}
+\usepackage[hidelinks]{hyperref}
+\usepackage[UKenglish]{babel}
+\usepackage[nottoc,notlot,notlof]{tocbibind}
+\usepackage[UKenglish]{datetime}
+\newdateformat{monthyear}{%
+	\monthname[\THEMONTH] \THEYEAR}
+
+% Commands required for using the Bath-Harvard citation standard
+\newcommand*{\urlprefix}{Available from: }
+\newcommand*{\urldateprefix}{Accessed }
+\bibliographystyle{bathx}
+
+% No indents in references
+\setlength\bibhang{0pt}
+% This package allows linebreaks in URLs, fixing a problem with long URLs in the References
+\usepackage{xurl}
+
+\RedeclareSectionCommand[
+runin = true,
+beforeskip = 0.5\baselineskip,
+afterskip = -1em]
+{paragraph}
+
+\renewcaptionname{UKenglish}{\bibname}{References}             %Bibliography
+
+%opening
+\title{Radar based attentiveness monitoring}
+\author{Thomas M. S. Smith}
+\subtitle{A literature review and project plan submitted to the University of Bath in partial fulfilment of the requirements for the award of MSc in Robotics and Autonomous Engineering}
+\publishers{Department of Electronic \& Electrical Engineering \\ University of Bath}
+\monthyear
+
+\begin{document}
+
+\maketitle
+
+\frontmatter
+
+\section*{Declaration}
+
+This literature review and project plan is submitted to The University of Bath in accordance with the requirements of the degree of Master of Science in Robotics and Autonomous Systems, in the Department of Electrical and Electronic Engineering. No portion of the work in this document has been submitted in support of an application for any other degree or qualification of this or any other university or institution of learning. Except where specifically acknowledged, it is the work of the author.
+
+\vskip 2cm
+\noindent\begin{tabular}{@{}p{0.5\textwidth}p{0.5\textwidth}@{}}
+	\dotfill                         & \dotfill\\
+	Thomas Smith              & Date\\
+\end{tabular} 
+
+
+\chapter*{Abstract}
+
+\tableofcontents
+
+\chapter*{Acknowledgements}
+\begin{itemize}
+	\item Ben Metcal....
+	\item Infineon....
+\end{itemize}
+
+\mainmatter
+
+
+\chapter{Introduction}
+\section{Motivation}
+\begin{itemize}
+	\item Why is remote / non-contact vital sign sensing useful
+	\item Applications
+	\item Driverless / level 3 autonomous vehicles
+	\item Studies / evidence of 'people don't pay attention when something else is doing the job for them, even if they're responsible...'
+\end{itemize}
+
+\section{Background}
+
+\section{Report Structure}
+\begin{itemize}
+	\item Literature review
+	\begin{itemize}
+		\item Driver attentiveness
+		\item Vital sign monitoring
+		\item Non-contact vital sign monitoring
+		\item Radar based heart rate monitoring
+		\item Sensor fusion for attentiveness monitoring
+	\end{itemize}
+	\item Project plan
+	\begin{itemize}
+		\item Aims and objectives
+		\item Specification
+		\item Milestones and deliverables
+		\end{itemize}
+\end{itemize}
+
+\chapter{Literature Review}
+\section{Notes}
+\begin{itemize}
+	\item Comment on:
+	\begin{itemize}
+		\item relevance
+		\item strengths and weakness
+		\item reliability
+		\item accuracy
+	\end{itemize}
+	\item Be up-to-date (with most emphasis on work less than 5 years old, less emphasis on work between 5 and 15 years old and only classic material older than 15 years)
+	\item Some papers from 2020 / 2021
+	\item Compare and contrast work
+	\item Draw new conclusions / findings
+	\item 
+\end{itemize}
+
+
+\section{Driver attentiveness}
+All based on literature!!
+
+\paragraph{\citep{koesdwiadyRecentTrendsDriver2017}} A high-level survey of driver monitoring systems. It doesn't seem great but probably provides some good references to follow up on. Discusses types of driver inattention which is useful. Introduces a taxonomy of driver distraction monitoring sources which is probably worth exploring. Main sources of driver distraction detection:
+\begin{itemize}
+	\item Driving behaviour measures, including LSTM tracking head movement \citep{wollmerOnlineDriverDistraction2011}
+	\item Physiological measures of driver (all vision based in this paper)
+	item Hybrid methods (driving behaviour and physiological measures)
+\end{itemize}
+
+Use of Dynamic Bayesian Networks to detect distraction via driving behaviour and eye movement \citep{liangHybridBayesianNetwork2014}
+
+Main sources of driver fatigue detection:
+\begin{itemize}
+	\item Driving behaviour measures
+	\item Physioological measures:
+	\begin{itemize}
+		\item Eye and face movement
+		\item Speech
+		\item PERCLOS (percent of eye closure)
+		\item Skin \citep{kurianDrowsinessDetectionUsing2014a}
+		\item Biological signals \citep{zhangAutomatedDetectionDriver2014}
+	\end{itemize}
+\end{itemize}
+
+\paragraph{\citep{reganDriverDistractionDriver2011}} Introduces definitions and taxonomy for driver distraction and driver inattention (distinguishing between the two).
+
+Driver inattention is defined as `insufficient, or no attention, to activities critical for safe driving'.
+
+\paragraph{\citep{tsuchiyaHeartbeatDetectionTechnology2020}} 24GHz microwave Doppler radar based heart rate detection. Sensor is placed in seat back to avoid interference from arm motions  Vibrations (e.g. from driving) cause noise to be superimposed over the sensor signal reducing the SNR (signal to noise ratio). The authors introduce an algorithm to cope with this. 
+
+Electrodes on steering wheels don't work if driver's hands are not on the wheel or the sensor, camera based systems raise concerns of intrusion / privacy. 
+
+Electrocardiogram: peaks of electrical activity are called P,Q,R,S, and T-waves. Interval between two consecutive R peaks is heartbeat interval (R-R interval, RRI). A heartbeat generates a small displacement of the body surface which is detected by radar system. However  respiration and body movements fal in the same band, making it difficult to extract heartbeat.
+
+Algorithm: Band-pass filter (BPF) -> short-time Fourier transform with Hamming window -> spectrum integration -> BPF -> peak detection
+
+The approach is a very 'engineered' one, with a complex(?) algorithm. 
+
+Experimental evaluation via in-car testing with ECG as reference sensor. Improved accuracy during driving compared to previous method but still poor equivalence to ECG reference sensor.
+
+\paragraph{\citep{jungDriverFatigueDrowsiness2014}} Electrocardigram (ECG) sensor embedded in steering wheel. Sample ECG signals at 100 Hz. Driver state assessed by evaluating heart rate variability (HRV), the variation of the time interval between heart beats. HRV can be used to evaluate the autonomic nervous system (ANS) status and can indicate normal, fatigued and drowsy states. HRV analysis methods can be in the time domain or the frequency domain. Time domain HRV is based on beat-to-beat intervals, frequency based HRV is by measuring the power spectral density (PSD) using parametric fast Fourier transforms.
+
+System was tested on two test subjects over a two hour driving test.  Results? 
+
+
+
+\begin{itemize}
+	\item Introduce SAE autonomous vehicle levels, cover why driver attentiveness matters:
+	\begin{itemize}
+		\item Primarily for level 3 autonomous vehicles, but also relevant in fully autonomous vehicles (e.g. driver is uncomfortable, slow down)
+		\item Useful in level 1 and 2 autonomous situations ('take a break', 'wake up' beep)
+	\end{itemize}
+	\item How is driver attentiveness 'categorised' or assessed? Is there an existing scale I can borrow?
+	\item How is driver attentiveness measured or monitored:
+	\begin{itemize}
+		\item heart rate (e.g. steering wheel )
+		\item eye motion tracking
+		\item vision based systems
+		\item head / body motion tracking?
+		\item driving behaviour
+	\end{itemize}
+\end{itemize}
+
+\section{Clinical vital sign monitoring}
+Vital sign monitoring in a clinical setting. Focus on heart rate and breathing rate(?) but discuss blood oxygen saturation, pressure etc.
+
+\begin{itemize}
+	\item Photoplethysmography (PPG) and rPPG (LifeLight)
+	\item 
+\end{itemize}
+
+\section{Healthcare}
+Not sure what this is?
+
+\section{Non-contact vital sign monitoring}
+\begin{itemize}
+	\item Why is non-contact vital sign monitoring useful (outside of driver attention setting)
+	\item Existing technologies for non-contact vital sign monitoring:
+	\begin{itemize}
+		\item rPPG (lifesight)
+		\item Existing papers with radar based heart \& breathing rate measurement
+	\end{itemize}
+\end{itemize}
+
+\section{Radar based heart rate monitoring}
+Probably covered in the proceeding section
+
+\section{Sensor fusion for monitoring attention}
+Introduce sensor fusion methods (e.g. radar \& vision)
+
+\chapter{Project Plan}
+\section{Aims and Objectives}
+
+\section{Requirement Specification}
+
+\section{Technical Specification}
+
+\section{Definition of Subtasks}
+
+\section{Milestones and Deliverables}
+Including Gantt chart (which I can make in \LaTeX because I'm fancy!!)
+
+\bibliography{references}
+
+\end{document}
