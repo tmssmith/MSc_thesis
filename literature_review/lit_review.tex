@@ -32,9 +32,12 @@ afterskip = -1em]
 
 % Set up acronyms
 \usepackage[toc, nogroupskip, nonumberlist, nopostdot]{glossaries}
+\usepackage{glossary-mcols}
 \makenoidxglossaries
 \setacronymstyle{long-short}
 \loadglsentries{gls_defns}
+\glsfindwidesttoplevelname
+\setglossarystyle{super}
 
 \usepackage[noabbrev]{cleveref}
 
@@ -243,14 +246,8 @@ Present existing methods, categorise as:
 	\item Driver models (Kalman Filter of the driver?)
 \end{itemize}
 
-
 \paragraph{content}
-
-\todo{Present summary diagram similar to fig. 3 of \citep{koesdwiadyRecentTrendsDriver2017}}
-
 A number of approaches for driver attentiveness monitoring have been proposed in the literature, using a variety of measured signals to detect the different forms of driver inattention, \gls{dra} and \gls{dda}, introduced previously. Due to the different causes and symptoms of \gls{dra} and \gls{dda} some approaches are better suited to detecting one or the other. Monitoring approaches can either be categorised according to the form(s) of driver inattention they are best suited to monitoring or according the measures that are used to assess attentiveness. In this section relevant literature is identified and discussed according to the measures used, as this is more useful because..... A taxonomy for all the measures considered in this work is shown in \cref{fig:taxonomy_measures}
-
-
 
 \begin{figure} 
 	\centering
@@ -259,20 +256,11 @@ A number of approaches for driver attentiveness monitoring have been proposed in
 	\label{fig:taxonomy_measures}
 \end{figure}
 \todo{REPRODUCE FIGURE TO REFLECT CONTENTS OF THIS WORK}
-
+\todo{Present summary diagram similar to fig. 3 of \citep{koesdwiadyRecentTrendsDriver2017}}
 
 Consider the following works:
 \begin{itemize}
- 	\item \citet{wollmerOnlineDriverDistraction2011} Driving behaviour, \gls{lstm} tracking, head movement
-	\item \citet{liangHybridBayesianNetwork2014} \gls{dbn} for driving behaviour and eye movement
-	\item \citet{kurianDrowsinessDetectionUsing2014a} \gls{ppg} for fatigue detection
-	\item \citet{zhangAutomatedDetectionDriver2014} Various entropy and complexity measures applied to \gls{eeg}, \gls{emg} and \gls{eog} signals
-	\item \citet{tsuchiyaHeartbeatDetectionTechnology2020} heart rate detection via 24~GHz radar
-	\item \citet{jungDriverFatigueDrowsiness2014} \gls{hrv} measurement via \gls{ecg} on steering wheel to monitor fatigue
-	\item \citet{aksjonovDetectionEvaluationDriver2019} Fuzzy expert model for driver distraction detection
-	\item \citet{liDetectionDriverDrowsiness2013} Fatigue detection from \gls{svm} applied to \gls{hrv} measured using \gls{ppg} 
-	\item \citet{yuDriverDrowsinessDetection2019} vision based \gls{cnn} detection of fatigue
-	\item \citet{gaoEEGBasedSpatioTemporal2019} \gls{eeg} based \gls{cnn}
+ 	\item \citet{gaoEEGBasedSpatioTemporal2019} \gls{eeg} based \gls{cnn}
 	\item \citet{crayeMultiModalDriverFatigue2016} multi-modal detection of fatigue
 	\item \citet{duaAutoRateHowAttentive2019}  A five rating scale of driver attentiveness based on \gls{cnn} and \gls{gru}
 	\item \citet{greeleyDetectingFatigueVoice2006} Voice audio and speech recognition to detect fatigue
@@ -283,8 +271,51 @@ Consider the following works:
 	
 \end{itemize}
 
+\paragraph{\citet{wollmerOnlineDriverDistraction2011}} Uses \gls{lstm} \glspl{rnn} for the classification of driver distraction with 96.6~\% accuracy. Measures are head tracking and driving behaviour signals: steering wheel angle, throttle position, speed, heading angle, lateral deviation. Note that these driving behaviour signals are likely to be less relevant in level 2 and 3 automated vehicles were lateral and longitudinal control is by the \gls{ads} and not the human driver. Distraction is classified using either two, three or six classes to investigate the possible granularity of the classification approach. Training and testing used a real world driving dataset. Distraction tasks were non-driving related operation of in-vehicle information systems such as a radio and satellite navigation system. Thus this work is untested on internal distraction (day-dreaming) and auditory distraction, such as talking on a hands-free telephone or to a passenger. The authors test the use of low level signals and statistical functions of the signals over a number of frames (\emph{functionals}), finding that the use of functionals as an input to the \gls{lstm} results in greater accuracy, although using low level input signals still outperformed \gls{rnn} and \gls{svm} based implementations.
 
+Using the \gls{lstm} is good because time series data... need to make this point better...
 
+\paragraph{\citet{liangHybridBayesianNetwork2014}} Uses a layered algorithm with \gls{dbn} and supervised clustering to detect cognitive distraction from eye movements and driving behaviour. Lowe layer (supervised clustering) used to identify key features and represent that in a more abstract fashion, improving the computation speeds of the \gls{dbn}.  Data from a simulator with auditory cognitive distraction used to train a layered \gls{dbn}, \gls{dbn} and \gls{svm} algorithm for comparison. Comparable performance to previous methods but with reduced training and prediction times. 
+
+Eye movement measured using a Seeing Machines faceLAB eye tracker. Driving behaviour measured as the standard deviation of steering wheel angle and lane position, and steering error. Steering error is a metric of steering smoothness, found by comparing the steering wheel angle to a steering angle predicted by a second-order Taylor expansion. A different model is trained and tested for each driver in the experiment.
+
+Predictions are more interpretable than \gls{svm} alone, and both training and prediction is computationally quicker than \gls{dbn} in isolation. 
+ 
+\paragraph{\citet{kurianDrowsinessDetectionUsing2014a}} Fatigue detection by monitoring \gls{ans} activity from pulse rate variabilit measured by \gls{ppg}. \todo{Add reference to sympathetic and parasympathetic activity} \cref{ssec:vital_signs} for further discussion on \gls{ppg} measurement and interpretation. Subject movement during \gls{ppg} measurements introduces noise artefacts to the signal. The authors use a noise removal process of baseline drift removal, wavelet denoising and squaring the signal. An \gls{svm} is trained to detect fatigue from the \gls{pp} values derived from the \gls{ppg} measurement. 
+
+Scope to extend this for \gls{rppg}. \todo{This is a very low quality reference, try to find a better \gls{ppg} based paper}
+
+\paragraph{\citet{zhangAutomatedDetectionDriver2014}} Various entropy and complexity measures applied to simultaneously recorded \gls{eeg}, \gls{emg} and \gls{eog} signals for real-time detection of fatigue. An \gls{ann} is trained to classify fatigue in one of four levels using the complexity measures. Accuracy of estimation between 96.5\% and 99.5\%. Obvious weakness is that \gls{eeg}, \gls{emg} and \gls{eog} signals are contact-based measurements using complex and expensive equipment (electrodes placed on occiput, eyelids, and neck). \todo{Probably a good reference but could do with understanding it better?}
+
+\paragraph{\citet{tsuchiyaHeartbeatDetectionTechnology2020}} 24GHz microwave Doppler radar based heart rate detection. Sensor is placed in seat back to avoid interference from arm motions  Vibrations (e.g. from driving) cause noise to be superimposed over the sensor signal reducing the SNR (signal to noise ratio). The authors introduce an algorithm to cope with this. 
+
+Electrodes on steering wheels don't work if driver's hands are not on the wheel or the sensor, camera based systems raise concerns of intrusion / privacy. 
+
+Electrocardiogram: peaks of electrical activity are called P,Q,R,S, and T-waves. Interval between two consecutive R peaks is heartbeat interval (R-R interval, RRI). A heartbeat generates a small displacement of the body surface which is detected by radar system. However  respiration and body movements fal in the same band, making it difficult to extract heartbeat.
+
+Algorithm: Band-pass filter (BPF) -> short-time Fourier transform with Hamming window -> spectrum integration -> BPF -> peak detection
+
+The approach is a very 'engineered' one, with a complex(?) algorithm. 
+
+Experimental evaluation via in-car testing with ECG as reference sensor. Improved accuracy during driving compared to previous method but still poor equivalence to ECG reference sensor.
+
+\paragraph{\citet{jungDriverFatigueDrowsiness2014}} Electrocardigram (ECG) sensor embedded in steering wheel. Sample ECG signals at 100 Hz. Driver state assessed by evaluating heart rate variability (HRV), the variation of the time interval between heart beats. HRV can be used to evaluate the autonomic nervous system (ANS) status and can indicate normal, fatigued and drowsy states. HRV analysis methods can be in the time domain or the frequency domain. Time domain HRV is based on beat-to-beat intervals, frequency based HRV is by measuring the power spectral density (PSD) using parametric fast Fourier transforms.
+	
+System was tested on two test subjects over a two hour driving test. results?
+
+\paragraph{\citet{aksjonovDetectionEvaluationDriver2019}} Rule based expert system using fuzzy logic for measuring driver distraction. Tested via driver-in-the-loop experiments in a simulator, where the driver completes a distracting task while driving (replying to a text message). Measures relate to driving performance. Nonlinear regression to output a single number as a measure of distraction. An \gls{ann} is trained to predict the lane keeping and speed deviation based on speed limits and turn radius. This is compared to actual lane offset and speed deviations with a fuzzy logic control returning a percentage measure of driver distraction. The prediction model requires the driver to first drive the route as accurately as possible which presents an issue for generalisation to new environments. The resulting measurements of driver distraction align with the periods in which the drivers were performing the distraction task, although the value of a numerical measure is not obvious?  Stands out by returning a value though
+
+\paragraph{\citet{liDetectionDriverDrowsiness2013}} wavelet transform of \gls{hrv} signals measured using \gls{ppg} with a \gls{svm} classifier with categories alert and drowsy. Incorporated into an application which will find a nearby rest location if fatigue is detected. A $1^\text{st}$ order differential operation is used to filter movement induced noise from the  \gls{hrv} time series data, which is then decomposed into nine wavelet levels before an \gls{svm} is used to classify the level of fatigue. The system was tested with four participants in a driving simulator. The accuracy of the classification of the drivers' fatigue (as alert of drowsy) was 95\%.
+
+\paragraph{\citet{yuDriverDrowsinessDetection2019}} System uses four models to detect fatigue: representation learning, scene understanding, feature fusion, and fatigue detection. The representation learning model uses a 3D \gls{cnn} that allows for a sequence of frames to be used as an input to the \gls{cnn}, and outputs a spatio-temporal representation of the scene. This representation is passed through a scene understanding model which interprets key features of the scene, including illumination and head, mouth and eye conditions. The output of the scene understanding model is combined with the scene representation in a fusion model, before a detection model classifies the driver as fatigued or alert. The combined model is resilient to variations in scene composition, such as the wearing or removal of glasses, and variation in light conditions. 
+ 
+The system was trained and tested using the \gls{nthu} Drowsy Driver Detection video dataset \citep{wengDriverDrowsinessDetection2017} which consists of over nine hours of video data of 36 subjects performing simulated driving tasks while making various facial expressions in response to external requests. A potential issue with this dataset is that the facial expressions and other displays of fatigue are being simulated by the participants by them acting as if they were fatigued. It is likely that the facial expressions and behaviour of an individual experiences real fatigue will differ from these simulated expressions. However this dataset does allow researchers to demonstrate the feasibility of a given approach, even if further training and testing is required in real-world conditions.
+
+The average classification accuracy was 76.2\% and was consistently more accurate than alternative approaches tested on the same dataset. Although the final accuracy reported is low compared to some other methods considered here, it is difficult to directly compare works which are assessed under different conditions and using different datasets. In addition the dataset used in this work includes a number of challenging scenarios, such as direct sunlight, night and the wearing and removal of glasses.
+
+\paragraph{\citet{trutschelPERCLOSAlertnessMeasure2011}}
+
+\paragraph{\citet{gaoEEGBasedSpatioTemporal2019}} 
 
 \paragraph{\citep{koesdwiadyRecentTrendsDriver2017}} A high-level survey of driver monitoring systems. It doesn't seem great but probably provides some good references to follow up on. Discusses types of driver inattention which is useful. Introduces a taxonomy of driver distraction monitoring sources which is probably worth exploring. Main sources of driver distraction detection:
 \begin{itemize}
@@ -312,17 +343,7 @@ Main sources of driver fatigue detection:
 
 Driver inattention is defined as `insufficient, or no attention, to activities critical for safe driving'. This is a good reference with good taxonomy etc.
 
-\paragraph{\citep{tsuchiyaHeartbeatDetectionTechnology2020}} 24GHz microwave Doppler radar based heart rate detection. Sensor is placed in seat back to avoid interference from arm motions  Vibrations (e.g. from driving) cause noise to be superimposed over the sensor signal reducing the SNR (signal to noise ratio). The authors introduce an algorithm to cope with this. 
 
-Electrodes on steering wheels don't work if driver's hands are not on the wheel or the sensor, camera based systems raise concerns of intrusion / privacy. 
-
-Electrocardiogram: peaks of electrical activity are called P,Q,R,S, and T-waves. Interval between two consecutive R peaks is heartbeat interval (R-R interval, RRI). A heartbeat generates a small displacement of the body surface which is detected by radar system. However  respiration and body movements fal in the same band, making it difficult to extract heartbeat.
-
-Algorithm: Band-pass filter (BPF) -> short-time Fourier transform with Hamming window -> spectrum integration -> BPF -> peak detection
-
-The approach is a very 'engineered' one, with a complex(?) algorithm. 
-
-Experimental evaluation via in-car testing with ECG as reference sensor. Improved accuracy during driving compared to previous method but still poor equivalence to ECG reference sensor.
 
 \paragraph{\citep{jungDriverFatigueDrowsiness2014}} Electrocardigram (ECG) sensor embedded in steering wheel. Sample ECG signals at 100 Hz. Driver state assessed by evaluating heart rate variability (HRV), the variation of the time interval between heart beats. HRV can be used to evaluate the autonomic nervous system (ANS) status and can indicate normal, fatigued and drowsy states. HRV analysis methods can be in the time domain or the frequency domain. Time domain HRV is based on beat-to-beat intervals, frequency based HRV is by measuring the power spectral density (PSD) using parametric fast Fourier transforms.
 
@@ -400,7 +421,7 @@ Figure 5 gives an excellent view of the frequencies investigated for \gls{ncvs} 
 
 
 Discuss vital sign monitoring in a healthcare setting (personal and clinical), with a view to potential cross-overs between driver distraction and inattention monitoring and vital sign monitoring (in both directions).
-\subsection{Vital signs}
+\subsection{Vital signs} \label{ssec:vital_signs}
 Briefly introduce and define the key vital signs used in healthcare settings (`textbook' definitions)
 \subsection{Approaches for monitoring vital signs}
 Brief overview of existing vital sign monitoring approaches:
@@ -418,7 +439,7 @@ Brief overview of existing vital sign monitoring approaches:
 Highlight gaps in existing works, along with any opportunities presented by these gaps or by extending or combining existing approaches
 
 \section{Discussion}
-Draw links between driver distraction/awareness and healthcare setting,highlight promising approaches and directions, and existing challenges to overcome. Draw the literature review to a close by summarising review and findings. 
+Draw links between driver distraction/awareness and healthcare setting,highlight promising approaches and directions, and existing challenges to overcome. Draw the literature review to a close by summarising review and findings. Tie into project direction
 
 
 \chapter{Project Plan}
