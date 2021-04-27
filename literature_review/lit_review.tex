@@ -216,11 +216,21 @@ In this work the term driver inattention is used according to the definition of 
 
 \paragraph{\gls{dca}} cursory attention to elements of the driver task, for example a quick glance in the rear-view mirror without fully processing the scene. Probably can't be monitored but the consequences can be mitigated through \gls{adas} systems such as automatic emergency braking or blind-spot warnings
 
-\paragraph{\gls{dda}} `The diversion of attention away from activities critical for safe driving towards a competing activity' \citep{reganDriverDistractionDriver2011}. This category encompasses driver distractions, whether related to the driving task, conversing with a passenger or on the telephone, or sending a text message, or watching a video etc...  
+\paragraph{\gls{dda}} `The diversion of attention away from activities critical for safe driving towards a competing activity' \citep{reganDriverDistractionDriver2011}. This category encompasses driver distractions, which can be considered to be manual, visual, cognitive, or a combination of the above, in nature.
 
 Some of these definitions are nuanced, and the authors themselves acknowledge that it is unlikely to be able to distinguish between some of the categories in practice. However the key points that are relevant to this work are that driver inattention can fall into a number of categories, with \gls{dra} and \gls{dda} being most relevant for a driver attentiveness monitoring system.
 
-\gls{dra} and some of the \gls{dda} causes of inattention could be monitored by a driver attentiveness monitoring system, and this directs the remainder of this work.
+\gls{dra} and some of the \gls{dda} causes of inattention could be monitored by a driver attentiveness monitoring system, and this directs the remainder of this work.  
+
+Looking at \gls{dda} in more detail, driver distraction can be classified as one or more of the following categories:
+\todo{find a reference for this?}
+\begin{itemize}
+	\item Visual distraction, where the driver's visual focus is a non-driving related subject, such as a mobile phone screen or a passenger.
+	\item Manual distraction, where a driver's feet or hands are removed from the pedals or steering wheel respectively.
+	\item Cognitive distraction, where a driver's thoughts are focussed on a task not related to the driving task, such as an involved conversation with a passenger.
+\end{itemize}
+
+The primary cause of \gls{dra} is likely to be fatigue, considered further in this work... \todo{find a reference for this}
 
 
 \subsection{Approaches for monitoring inattention} \label{ssec:approaches}
@@ -260,15 +270,12 @@ A number of approaches for driver attentiveness monitoring have been proposed in
 
 Consider the following works:
 \begin{itemize}
- 	\item \citet{gaoEEGBasedSpatioTemporal2019} \gls{eeg} based \gls{cnn}
-	\item \citet{crayeMultiModalDriverFatigue2016} multi-modal detection of fatigue
 	\item \citet{duaAutoRateHowAttentive2019}  A five rating scale of driver attentiveness based on \gls{cnn} and \gls{gru}
 	\item \citet{greeleyDetectingFatigueVoice2006} Voice audio and speech recognition to detect fatigue
 	\item \citet{fuDynamicDriverFatigue2016} \gls{hmm} applied to biological signals for fatigue detection
 	\item \citet{dingInattentiveDrivingBehavior2019} \gls{fmcw} radar used to detect driver head movements for inattention detection
 	\item \citet{liOnlineDetectionDriver2017} Steering wheel angles for driver fatigue detection
 	\item \citet{zhouPredictingDriverFatigue2021} Explainable fatigue prediction, need to read in more detail
-	
 \end{itemize}
 
 \paragraph{\citet{wollmerOnlineDriverDistraction2011}} Uses \gls{lstm} \glspl{rnn} for the classification of driver distraction with 96.6~\% accuracy. Measures are head tracking and driving behaviour signals: steering wheel angle, throttle position, speed, heading angle, lateral deviation. Note that these driving behaviour signals are likely to be less relevant in level 2 and 3 automated vehicles were lateral and longitudinal control is by the \gls{ads} and not the human driver. Distraction is classified using either two, three or six classes to investigate the possible granularity of the classification approach. Training and testing used a real world driving dataset. Distraction tasks were non-driving related operation of in-vehicle information systems such as a radio and satellite navigation system. Thus this work is untested on internal distraction (day-dreaming) and auditory distraction, such as talking on a hands-free telephone or to a passenger. The authors test the use of low level signals and statistical functions of the signals over a number of frames (\emph{functionals}), finding that the use of functionals as an input to the \gls{lstm} results in greater accuracy, although using low level input signals still outperformed \gls{rnn} and \gls{svm} based implementations.
@@ -315,7 +322,19 @@ The average classification accuracy was 76.2\% and was consistently more accurat
 
 \paragraph{\citet{trutschelPERCLOSAlertnessMeasure2011}}
 
-\paragraph{\citet{gaoEEGBasedSpatioTemporal2019}} 
+\paragraph{\citet{gaoEEGBasedSpatioTemporal2019}} Also using a 3D \gls{cnn} but with \gls{eeg} as input. Result is a \gls{eeg} based spatial-temporal \gls{cnn} to detect driver fatigue. Three convolutional layers were used Data for training and testing is from a driving simulator with eight subjects. Two class classification accuracy was 97.37\%, higher than all eight comparison methods considered by the authors.
+
+\paragraph{\citet{crayeMultiModalDriverFatigue2016}} Multi-modal - used audio, color video, depth map, heart rate, and steering wheel and pedal positions. Able to detect both fatigue and distraction, with 98.4\% and 90.5\% accuracy respectively. Input signals are processed by three modules (vision, audio, other) with each module producing an independent estimation of driver fatigue and distraction using \glspl{hmm}. The outputs of each module are fused with contextual information and a Bayesian network. System separately processes driver fatigue and distraction, and detects the type of action the driver is performing to estimate driver distraction.  Three modules: 
+\begin{itemize}
+	\item Vision module processes arm position, face orientation, facial expression and eye movements.
+	\item Voice module process audio signals.
+	\item Other signals module processes heart rate, and steering wheel and pedal positions.
+\end{itemize}
+Modules are independently processed and can be enable or disabled individually. Dataset is temporal so \glspl{hmm} are used. Two separate Bayesian networks are used, one each to detect fatigue and distraction.
+
+Driving simulator based. Dataset for training and testing gathered from eight subjects. Drivers simulated the symptoms of fatigue (yawning, closing their eyes) Drivers were also tasked with completing a number of distracting tasks during the experiment. Distraction was classified as one of either two or five classes, with the two class classification being more accurate. Driver arm position was found to be the most accurate indicator of distraction, with eye behaviour is being the lowest accuracy indicator, highlighting the importance of fusing multiple signals to get an accurate classification. 
+
+
 
 \paragraph{\citep{koesdwiadyRecentTrendsDriver2017}} A high-level survey of driver monitoring systems. It doesn't seem great but probably provides some good references to follow up on. Discusses types of driver inattention which is useful. Introduces a taxonomy of driver distraction monitoring sources which is probably worth exploring. Main sources of driver distraction detection:
 \begin{itemize}
@@ -329,7 +348,7 @@ Use of Dynamic Bayesian Networks to detect distraction via driving behaviour and
 Main sources of driver fatigue detection:
 \begin{itemize}
 	\item Driving behaviour measures
-	\item Physioological measures:
+	\item Physiological measures:
 	\begin{itemize}
 		\item Eye and face movement
 		\item Speech
@@ -438,8 +457,26 @@ Brief overview of existing vital sign monitoring approaches:
 \section{Gaps and opportunities}
 Highlight gaps in existing works, along with any opportunities presented by these gaps or by extending or combining existing approaches
 
+\begin{itemize}
+	\item Many works tested in driving simulators only and with low number of subjects
+	\item Many approaches require `invasive' measurement devices (at least in the context of driving a car). These are not viable in real world due to driver comfort and the risk of causing driver distraction in their own right
+	\item Many approaches use driving behaviour as an input. While this is valuable and useful as an input, it's value deteriorates with level 1 \gls{ads} and they are not usable for level 2 and level 3 systems, where both lateral and longitudinal control is by the \gls{ads}.
+	\item 
+\end{itemize}
+
 \section{Discussion}
+\paragraph{notes}
 Draw links between driver distraction/awareness and healthcare setting,highlight promising approaches and directions, and existing challenges to overcome. Draw the literature review to a close by summarising review and findings. Tie into project direction
+
+\begin{itemize}
+	\item Discuss sensors / measures as applicable to vehicle environment \citep{crayeMultiModalDriverFatigue2016} as a good starting point
+	\item Discuss values of different measures (binary vs. classifier vs. regression)
+	\item Discuss relative importance / ease of measure fatigue vs. distraction
+	\item Discuss cross-over from driver attentiveness to healthcare setting (both directions)
+	\item Audio isn't used much and is interesting to consider, but is it feasible when you consider radio / podcast / music etc.?
+\end{itemize}
+
+
 
 
 \chapter{Project Plan}
