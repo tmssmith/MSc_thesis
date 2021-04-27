@@ -191,6 +191,8 @@ In SAE levels 1 and 2 the human driver of the vehicle is always considered to be
 
 An SAE level 3 autonomous vehicle is capable of driving the vehicle under limited conditions, and the human is not considered to be the driver while the level 3 \gls{ads} is engaged. However the human driver must take back control of the driving task when requested to do so by the \gls{ads}. It is hopefully apparent that there are significant concerns and issues around driver distraction and inattention in level 1, 2 and 3 \gls{ads}, and these are areas where a low cost driver attentiveness monitoring system will offer benefits in safety and ....  \citet{teohWhatNameDrivers2020} report drivers consider many actions to be safe while a level 2 system is in operation, they're wrong, particularly bad for Autopilot. Prompt to remind drivers to pay attention, or disable the system where necessary etc...
 
+\citet{goncalvesDrowsinessConditionalAutomation2016} experimentally investigated passive fatigue caused by underloading a driver when autonomous systems are used. The majority of subjects reported high levels of drowsiness within 15 minutes, and a decrease in performance when responding to take over requests was found.
+
 Levels 4 and 5 can both be considered fully autonomous and the human driver is never expected or required to take control of the driving task. Level 4 is restricted to operate in limited circumstances, while level 5 automation can drive under all conditions. Driver attentiveness monitoring is not directly relevant to level 4 and 5 systems, however the closely related task of driver mood monitoring may be beneficial, allowing the \gls{ads} to tailor the vehicle ambience, driving route and style to the human occupants' current mood.
 
 In addition to all of this, a driver monitoring system which includes monitoring of vital signs may provide valuable information to emergency response and accident investigation teams (driver is alive but deteriorating, driver was healthy before \gls{rtc} vs driver had heart attack before \gls{rtc}). 
@@ -208,7 +210,7 @@ In this work the term driver inattention is used according to the definition of 
 \todo{REPRODUCE FIGURE, REMOVE DASHED BOXES}
 
 
-\paragraph{\gls{dra}} inattention caused by biological factors (e.g. fatigue) and therefore can be monitored
+\paragraph{\gls{dra}} inattention caused by biological factors (e.g. fatigue) and therefore can be monitored.
 
 \paragraph{\gls{dmpa}} incorrectly paying too much attention to one area of the driving task at the expense of a second equally or more important task. Probably can't be monitored but the consequences can be mitigated through \gls{adas} systems such as automatic emergency braking or blind-spot warnings
 
@@ -231,6 +233,8 @@ Looking at \gls{dda} in more detail, driver distraction can be classified as one
 \end{itemize}
 
 The primary cause of \gls{dra} is likely to be fatigue, considered further in this work... \todo{find a reference for this}
+
+
 
 
 \subsection{Approaches for monitoring inattention} \label{ssec:approaches}
@@ -322,7 +326,7 @@ The average classification accuracy was 76.2\% and was consistently more accurat
 
 \paragraph{\citet{trutschelPERCLOSAlertnessMeasure2011}}
 
-\paragraph{\citet{gaoEEGBasedSpatioTemporal2019}} Also using a 3D \gls{cnn} but with \gls{eeg} as input. Result is a \gls{eeg} based spatial-temporal \gls{cnn} to detect driver fatigue. Three convolutional layers were used Data for training and testing is from a driving simulator with eight subjects. Two class classification accuracy was 97.37\%, higher than all eight comparison methods considered by the authors.
+\paragraph{\citet{gaoEEGBasedSpatioTemporal2019}} Also using a 3D \gls{cnn} but with \gls{eeg} as input. Result is a \gls{eeg} based spatio-temporal \gls{cnn} to detect driver fatigue. Three convolutional layers were used Data for training and testing is from a driving simulator with eight subjects. Two class classification accuracy was 97.37\%, higher than all eight comparison methods considered by the authors.
 
 \paragraph{\citet{crayeMultiModalDriverFatigue2016}} Multi-modal - used audio, color video, depth map, heart rate, and steering wheel and pedal positions. Able to detect both fatigue and distraction, with 98.4\% and 90.5\% accuracy respectively. Input signals are processed by three modules (vision, audio, other) with each module producing an independent estimation of driver fatigue and distraction using \glspl{hmm}. The outputs of each module are fused with contextual information and a Bayesian network. System separately processes driver fatigue and distraction, and detects the type of action the driver is performing to estimate driver distraction.  Three modules: 
 \begin{itemize}
@@ -334,7 +338,24 @@ Modules are independently processed and can be enable or disabled individually. 
 
 Driving simulator based. Dataset for training and testing gathered from eight subjects. Drivers simulated the symptoms of fatigue (yawning, closing their eyes) Drivers were also tasked with completing a number of distracting tasks during the experiment. Distraction was classified as one of either two or five classes, with the two class classification being more accurate. Driver arm position was found to be the most accurate indicator of distraction, with eye behaviour is being the lowest accuracy indicator, highlighting the importance of fusing multiple signals to get an accurate classification. 
 
+\paragraph{\citet{duaAutoRateHowAttentive2019}}  A five rating scale of driver attentiveness based on \gls{cnn} and \gls{gru} for spatio-temporal representation of visual sensory input, using the front facing camera of a windscreen mounted smartphone. Dataset of 2900 unique video segments, each 10~seconds long, covering 30 drivers performing real-world driving tasks in a large city. Each video segment was rated on a five point scale by human annotators. 
 
+A number of pre-trained \glspl{cnn} are used to extract both generic features and specific facial features from the input frames. The outputs of both the generic and specific networks are combined using \glspl{lstm} so taht the temporal nature of both fatigue and distraction are considered. The system was tested on 782 unseen videos with an accuracy of 70\% compared to the human annotators.
+	
+\paragraph{\citet{greeleyDetectingFatigueVoice2006}} Spoken sentences from six subjects containing 37 words over a 34 hour period of sleep deprivation. \todo{This reference might not be worth including, I don't understand it and the results are not clearly reported}
+
+\paragraph{\citet{fuDynamicDriverFatigue2016}} \gls{hmm} applied to biological signals for fatigue detection. Measures are \gls{eeg}, \gls{emg} and respiration. Tested during real-world driving on 12 professional driver. Drivers self-reported their state as alert, mildly fatigued or fatigued. Measured signals were processed as follows. A \gls{fft} and Butterworth band-pass filters were applied to the \gls{eeg} signal to get the power spectrum of three fatigue related frequency bands, theta, alpha and beta. \todo{probably need more here....}
+
+\paragraph{\citet{dingInattentiveDrivingBehavior2019}} \gls{fmcw} radar used to detect driver movements for inattention detection. Potentially more acceptable to consumers as does not require a camera. Seven driver behaviours were investigated with time-Doppler spectrograms and range-Doppler trajectories measured by \gls{fmcw} radar. Frequencies investigated are 5.8 and 24~Ghz, with the 5.8~Ghz radar resolution found to be too low for accurate results. Testing is performed on six human subjects.
+
+Radar signals were processed to e...
+
+A range of machine learning methods were tested to classify the driver attentiveness based on features extracted from the time-Doppler spectrogram and range-Doppler trajectory. A Bagged Trees classifier was found to have the highest average accuracy across the seven investigated driver behaviours, achieving 94.8\%, 93.3\% and 95.6\% average accuracy for time-Doppler, range-Doppler, and combined feature inputs respectively. 
+ 
+\paragraph{\citet{liOnlineDetectionDriver2017}} Steering wheel angles for driver fatigue detection 
+
+\paragraph{\citet{zhouPredictingDriverFatigue2021}} Explainable fatigue prediction ysubg XGBoost prediction model and SHAP for explainability.  Experiments performed in a driving simulator, with the subject performing a simple driving task before an \gls{ads} took over the driving task, with the subject supervising the \gls{ads} system but completing no additional tasks, with the intention of inducing passive fatigue as discussed by \citep{goncalvesDrowsinessConditionalAutomation2016}. \gls{perclos} was used as the ground truth signal for fatigue. Measures used for the prediction model were related to heart rate and respiratory rate, as well as \gls{ecg}, steering wheel torque and angle, and driver posture. The most important measures according to SHAP value were heart rate (averaged over 60 seconds), \gls{hrv} and breathing rate (averaged over 60 seconds). Interesting \gls{ecg} was reported as the second lowest important measure - \gls{ecg} is commonly used for fatigue detection.  
+	
 
 \paragraph{\citep{koesdwiadyRecentTrendsDriver2017}} A high-level survey of driver monitoring systems. It doesn't seem great but probably provides some good references to follow up on. Discusses types of driver inattention which is useful. Introduces a taxonomy of driver distraction monitoring sources which is probably worth exploring. Main sources of driver distraction detection:
 \begin{itemize}
@@ -362,11 +383,6 @@ Main sources of driver fatigue detection:
 
 Driver inattention is defined as `insufficient, or no attention, to activities critical for safe driving'. This is a good reference with good taxonomy etc.
 
-
-
-\paragraph{\citep{jungDriverFatigueDrowsiness2014}} Electrocardigram (ECG) sensor embedded in steering wheel. Sample ECG signals at 100 Hz. Driver state assessed by evaluating heart rate variability (HRV), the variation of the time interval between heart beats. HRV can be used to evaluate the autonomic nervous system (ANS) status and can indicate normal, fatigued and drowsy states. HRV analysis methods can be in the time domain or the frequency domain. Time domain HRV is based on beat-to-beat intervals, frequency based HRV is by measuring the power spectral density (PSD) using parametric fast Fourier transforms.
-
-System was tested on two test subjects over a two hour driving test. results?
 
 \paragraph{\citep{sikanderDriverFatigueDetection2019}} Fatigue detection methods are implemented as either: bio-mathematical models, rule based, or machine learning models. Remember that fatigue is only one of the causes of driver inattention.  A good reference and source of references for fatigue related approaches.
 
@@ -461,7 +477,7 @@ Highlight gaps in existing works, along with any opportunities presented by thes
 	\item Many works tested in driving simulators only and with low number of subjects
 	\item Many approaches require `invasive' measurement devices (at least in the context of driving a car). These are not viable in real world due to driver comfort and the risk of causing driver distraction in their own right
 	\item Many approaches use driving behaviour as an input. While this is valuable and useful as an input, it's value deteriorates with level 1 \gls{ads} and they are not usable for level 2 and level 3 systems, where both lateral and longitudinal control is by the \gls{ads}.
-	\item 
+	\item There a no definitive objective measures for \gls{dra} or \gls{dda} which leads to challenges when developing driver attentiveness monitoring systems. As most fatigue and distraction measures are subjective and self-reported it is challenging to attain ground truth data for training and testing. Many studies force subjects to act the symptoms of fatigue or to complete a distracting task while in a simulated environment. Not ideal...  \citep{kaidaValidationKarolinskaSleepiness2006} KSS sleepiness scale??
 \end{itemize}
 
 \section{Discussion}
