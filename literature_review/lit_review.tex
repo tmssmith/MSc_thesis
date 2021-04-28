@@ -66,6 +66,7 @@ This literature review and project plan is submitted to The University of Bath i
 
 
 \addchap{Abstract}
+\todo{write abstract}
 Aim for 150-300 words
 
 
@@ -80,20 +81,20 @@ Aim for 150-300 words
 
 
 \chapter{Introduction} \label{ch:intro}
-This chapter presents an introduction to the project and to this report. Present the motivation and background for the project, before laying out the structure of the report.
+This chapter presents an introduction to the project and to this report. Present the motivation and background for the project, before laying out the structure of the report.  \todo{improve slightly}
 
 \section{Motivation} \label{sec:motive}
 
-\paragraph{Notes}
-\begin{itemize}
-	\item Road traffic collision casualty numbers
-	\item Driver inattention and distraction as contributor to road traffic collisions
-	\item Increasing adoption of level 2 and 3 ADAS systems, still require full driver attention
-	\item Possible application in level 4 and 5 systems
-	\item Vital sign monitoring as part of attentiveness detection, and value of non-contact vital sign monitoring in healthcare settings
-	\item Highlight opportunities for translation from healthcare to this application
-	\item Briefly discuss challenges of transition (different environment, different subject status)
-\end{itemize}
+%\paragraph{Notes}
+%\begin{itemize}
+%	\item Road traffic collision casualty numbers
+%	\item Driver inattention and distraction as contributor to road traffic collisions
+%	\item Increasing adoption of level 2 and 3 ADAS systems, still require full driver attention
+%	\item Possible application in level 4 and 5 systems
+%	\item Vital sign monitoring as part of attentiveness detection, and value of non-contact vital sign monitoring in healthcare settings
+%	\item Highlight opportunities for translation from healthcare to this application
+%	\item Briefly discuss challenges of transition (different environment, different subject status)
+%\end{itemize}
 
 Driver inattention is one of the leading causes of \glspl{rtc} \citep{petridouHumanFactorsCausation2000,youngDriverDistraction2007,olsonDriverDistractionCommercial2009}. The increasing adoption of driving automation systems has the potential to improve road safety and reduce the incidence and severity of \glspl{rtc} \citep{favaroExaminingAccidentReports2017} but the introduction of such systems does present additional challenges for driver inattention. A number of collisions involving automated driving systems have been reported where the driver appears to have failed to provide the required level of supervision to the automated system, see for example \citep{ntsbCollisionSportUtility2019,ntsbCollisionCarOperating2019}. Existing methods of monitoring driver attentiveness in production vehicles, such as Tesla's monitoring of steering wheel torque, are easily defeated by a user and so do not provide sufficient protection. The large contribution to \glspl{rtc} made by driver inattention, coupled with the increasing adoption of automated driving systems, are the primary motivation for this work. A robust driver attentiveness monitoring system may reduce accidents in manual driving by encouraging drivers to, for example, rest when fatigued, and may also facilitate the wider and safer adoption of automated driving systems which will in turn reduce \gls{rtc} instances. 
 
@@ -101,6 +102,8 @@ A common approach for driver attentiveness monitoring is based on the measuremen
 
 
 \section{Report Structure} \label{sec:struct}
+
+\todo{Write out in long form}
 Brief overview of the document structure, as follows:
 \begin{itemize}
 	\item Literature review:
@@ -152,21 +155,23 @@ Brief overview of the document structure, as follows:
 
 
 \chapter{Literature Review} \label{ch:litreview}
-This chapter focusses on the literature review. Focus is driver inattention and distraction monitoring, and non-contact vital sign measurements.
+This chapter focusses on the literature review. Focus is driver inattention and distraction monitoring, and non-contact vital sign measurements. \todo{improve this intro}
 
-\section{Driver distraction and inattention} \label{sec:distraction}
+\section{Driver inattention} \label{sec:distraction}
+Introductory text....
 
 \subsection{Overview and definitions} \label{ssec:overview}
-\paragraph{notes}
-\begin{itemize}
-	\item Highlight why driver attentiveness matters, introduce SAE autonomous vehicle levels, examples of when it goes wrong
-	\item Discuss and define driver distraction and inattention
-	\item Present taxonomy (either from \citep{reganDriverDistractionDriver2011} or specific to this work, prefer from source)
-\end{itemize}
-
-\paragraph{content}
+%\paragraph{notes}
+%\begin{itemize}
+%	\item Highlight why driver attentiveness matters, introduce SAE autonomous vehicle levels, examples of when it goes wrong
+%	\item Discuss and define driver distraction and inattention
+%	\item Present taxonomy (either from \citep{reganDriverDistractionDriver2011} or specific to this work, prefer from source)
+%\end{itemize}
+%
+%\paragraph{content}
 
 \subsubsection{Automated driving systems}
+\todo{Should be ok as first draft}
 As \glspl{ads} become more common and more advanced, the issue of driver inattention is likely to become even more critical. One particular area of concern is partially-autonomous vehicles, where the driver is still required to monitor and react to the environment while the \gls{ads} is performing certain driving tasks.  In \citep{J3016_201806} SAE International introduced a taxonomy and definitions for six levels of driving automation which is widely used in the discussion of autonomous vehicles. A summary of the six levels is shown in \cref{fig:av_levels}. These six levels of autonomy are based on four main factors which differentiate between whether the (human) driver or the automated system is responsible for certain tasks: 
 
 \begin{enumerate}
@@ -198,6 +203,7 @@ Levels 4 and 5 can both be considered fully autonomous and the human driver is n
 In addition to all of this, a driver monitoring system which includes monitoring of vital signs may provide valuable information to emergency response and accident investigation teams (driver is alive but deteriorating, driver was healthy before \gls{rtc} vs driver had heart attack before \gls{rtc}). 
 
 \subsubsection{Driver inattention}
+\todo{Should be ok as first draft}
 In this work we adopt the terminology of \citet{reganDriverDistractionDriver2011} when discussing driver inattention
 In this work the term driver inattention is used according to the definition of \citet{reganDriverDistractionDriver2011} to mean `insufficient, or no attention, to activities critical for safe driving'. This inattention can stem from a number of different sources including fatigue and external distractions. The potential sources of inattention have implications for the design of an attentiveness monitoring system\textemdash an appropriate input signal detect fatigue induced inattention is likely to differ from a signal for distraction.  \citet{reganDriverDistractionDriver2011} identify five categories of driver inattention, resulting in the taxonomy presented in \cref{fig:taxonomy_inattention}. A brief discussion of these five categories is given here with the intention of identifying whether a category lends itself to monitoring via a driver attentiveness system. 
 
@@ -209,12 +215,11 @@ In this work the term driver inattention is used according to the definition of 
 \end{figure}
 \todo{REPRODUCE FIGURE, REMOVE DASHED BOXES}
 
-
 \paragraph{\gls{dra}} inattention caused by biological factors (e.g. fatigue) and therefore can be monitored.
 
 \paragraph{\gls{dmpa}} incorrectly paying too much attention to one area of the driving task at the expense of a second equally or more important task. Probably can't be monitored but the consequences can be mitigated through \gls{adas} systems such as automatic emergency braking or blind-spot warnings
 
-\paragraph{\gls{dna}}  TBC
+\paragraph{\gls{dna}}  \todo{Need to actually include this bit...}
 
 \paragraph{\gls{dca}} cursory attention to elements of the driver task, for example a quick glance in the rear-view mirror without fully processing the scene. Probably can't be monitored but the consequences can be mitigated through \gls{adas} systems such as automatic emergency braking or blind-spot warnings
 
@@ -232,35 +237,32 @@ Looking at \gls{dda} in more detail, driver distraction can be classified as one
 	\item Cognitive distraction, where a driver's thoughts are focussed on a task not related to the driving task, such as an involved conversation with a passenger.
 \end{itemize}
 
-The primary cause of \gls{dra} is likely to be fatigue, considered further in this work... \todo{find a reference for this}
-
-
-
 
 \subsection{Approaches for monitoring inattention} \label{ssec:approaches}
-
-\paragraph{notes}
-Present existing methods, categorise as:
-\begin{itemize}
-	\item Driving behaviour measures:
-	\begin{itemize}
-		\item Driving input measures (steering, brakes, accelerator)
-		\item Lane-keeping
-		\item Spacing to surrounding vehicles
-	\end{itemize}
-	\item Driver physiological measures:
-	\begin{itemize}
-		\item Heart rate
-		\item Eye motion tracking
-		\item Vision based systems
-		\item Head motion tracking
-		\item Facial expressions
-	\end{itemize}
-	\item Discuss methods which combine measures
-	\item Driver models (Kalman Filter of the driver?)
-\end{itemize}
-
-\paragraph{content}
+\todo{tie all of this together, need to decide on structure... strucutre based on measure?}
+%
+%\paragraph{notes}
+%Present existing methods, categorise as:
+%\begin{itemize}
+%	\item Driving behaviour measures:
+%	\begin{itemize}
+%		\item Driving input measures (steering, brakes, accelerator)
+%		\item Lane-keeping
+%		\item Spacing to surrounding vehicles
+%	\end{itemize}
+%	\item Driver physiological measures:
+%	\begin{itemize}
+%		\item Heart rate
+%		\item Eye motion tracking
+%		\item Vision based systems
+%		\item Head motion tracking
+%		\item Facial expressions
+%	\end{itemize}
+%	\item Discuss methods which combine measures
+%	\item Driver models (Kalman Filter of the driver?)
+%\end{itemize}
+%
+%\paragraph{content}
 A number of approaches for driver attentiveness monitoring have been proposed in the literature, using a variety of measured signals to detect the different forms of driver inattention, \gls{dra} and \gls{dda}, introduced previously. Due to the different causes and symptoms of \gls{dra} and \gls{dda} some approaches are better suited to detecting one or the other. Monitoring approaches can either be categorised according to the form(s) of driver inattention they are best suited to monitoring or according the measures that are used to assess attentiveness. In this section relevant literature is identified and discussed according to the measures used, as this is more useful because..... A taxonomy for all the measures considered in this work is shown in \cref{fig:taxonomy_measures}
 
 \begin{figure} 
@@ -272,16 +274,6 @@ A number of approaches for driver attentiveness monitoring have been proposed in
 \todo{REPRODUCE FIGURE TO REFLECT CONTENTS OF THIS WORK}
 \todo{Present summary diagram similar to fig. 3 of \citep{koesdwiadyRecentTrendsDriver2017}}
 
-Consider the following works:
-\begin{itemize}
-	\item \citet{duaAutoRateHowAttentive2019}  A five rating scale of driver attentiveness based on \gls{cnn} and \gls{gru}
-	\item \citet{greeleyDetectingFatigueVoice2006} Voice audio and speech recognition to detect fatigue
-	\item \citet{fuDynamicDriverFatigue2016} \gls{hmm} applied to biological signals for fatigue detection
-	\item \citet{dingInattentiveDrivingBehavior2019} \gls{fmcw} radar used to detect driver head movements for inattention detection
-	\item \citet{liOnlineDetectionDriver2017} Steering wheel angles for driver fatigue detection
-	\item \citet{zhouPredictingDriverFatigue2021} Explainable fatigue prediction, need to read in more detail
-\end{itemize}
-
 \paragraph{\citet{wollmerOnlineDriverDistraction2011}} Uses \gls{lstm} \glspl{rnn} for the classification of driver distraction with 96.6~\% accuracy. Measures are head tracking and driving behaviour signals: steering wheel angle, throttle position, speed, heading angle, lateral deviation. Note that these driving behaviour signals are likely to be less relevant in level 2 and 3 automated vehicles were lateral and longitudinal control is by the \gls{ads} and not the human driver. Distraction is classified using either two, three or six classes to investigate the possible granularity of the classification approach. Training and testing used a real world driving dataset. Distraction tasks were non-driving related operation of in-vehicle information systems such as a radio and satellite navigation system. Thus this work is untested on internal distraction (day-dreaming) and auditory distraction, such as talking on a hands-free telephone or to a passenger. The authors test the use of low level signals and statistical functions of the signals over a number of frames (\emph{functionals}), finding that the use of functionals as an input to the \gls{lstm} results in greater accuracy, although using low level input signals still outperformed \gls{rnn} and \gls{svm} based implementations.
 
 Using the \gls{lstm} is good because time series data... need to make this point better...
@@ -292,10 +284,6 @@ Eye movement measured using a Seeing Machines faceLAB eye tracker. Driving behav
 
 Predictions are more interpretable than \gls{svm} alone, and both training and prediction is computationally quicker than \gls{dbn} in isolation. 
  
-\paragraph{\citet{kurianDrowsinessDetectionUsing2014a}} Fatigue detection by monitoring \gls{ans} activity from pulse rate variabilit measured by \gls{ppg}. \todo{Add reference to sympathetic and parasympathetic activity} \cref{ssec:vital_signs} for further discussion on \gls{ppg} measurement and interpretation. Subject movement during \gls{ppg} measurements introduces noise artefacts to the signal. The authors use a noise removal process of baseline drift removal, wavelet denoising and squaring the signal. An \gls{svm} is trained to detect fatigue from the \gls{pp} values derived from the \gls{ppg} measurement. 
-
-Scope to extend this for \gls{rppg}. \todo{This is a very low quality reference, try to find a better \gls{ppg} based paper}
-
 \paragraph{\citet{zhangAutomatedDetectionDriver2014}} Various entropy and complexity measures applied to simultaneously recorded \gls{eeg}, \gls{emg} and \gls{eog} signals for real-time detection of fatigue. An \gls{ann} is trained to classify fatigue in one of four levels using the complexity measures. Accuracy of estimation between 96.5\% and 99.5\%. Obvious weakness is that \gls{eeg}, \gls{emg} and \gls{eog} signals are contact-based measurements using complex and expensive equipment (electrodes placed on occiput, eyelids, and neck). \todo{Probably a good reference but could do with understanding it better?}
 
 \paragraph{\citet{tsuchiyaHeartbeatDetectionTechnology2020}} 24GHz microwave Doppler radar based heart rate detection. Sensor is placed in seat back to avoid interference from arm motions  Vibrations (e.g. from driving) cause noise to be superimposed over the sensor signal reducing the SNR (signal to noise ratio). The authors introduce an algorithm to cope with this. 
@@ -303,10 +291,6 @@ Scope to extend this for \gls{rppg}. \todo{This is a very low quality reference,
 Electrodes on steering wheels don't work if driver's hands are not on the wheel or the sensor, camera based systems raise concerns of intrusion / privacy. 
 
 Electrocardiogram: peaks of electrical activity are called P,Q,R,S, and T-waves. Interval between two consecutive R peaks is heartbeat interval (R-R interval, RRI). A heartbeat generates a small displacement of the body surface which is detected by radar system. However  respiration and body movements fal in the same band, making it difficult to extract heartbeat.
-
-Algorithm: Band-pass filter (BPF) -> short-time Fourier transform with Hamming window -> spectrum integration -> BPF -> peak detection
-
-The approach is a very 'engineered' one, with a complex(?) algorithm. 
 
 Experimental evaluation via in-car testing with ECG as reference sensor. Improved accuracy during driving compared to previous method but still poor equivalence to ECG reference sensor.
 
@@ -341,8 +325,6 @@ Driving simulator based. Dataset for training and testing gathered from eight su
 \paragraph{\citet{duaAutoRateHowAttentive2019}}  A five rating scale of driver attentiveness based on \gls{cnn} and \gls{gru} for spatio-temporal representation of visual sensory input, using the front facing camera of a windscreen mounted smartphone. Dataset of 2900 unique video segments, each 10~seconds long, covering 30 drivers performing real-world driving tasks in a large city. Each video segment was rated on a five point scale by human annotators. 
 
 A number of pre-trained \glspl{cnn} are used to extract both generic features and specific facial features from the input frames. The outputs of both the generic and specific networks are combined using \glspl{lstm} so taht the temporal nature of both fatigue and distraction are considered. The system was tested on 782 unseen videos with an accuracy of 70\% compared to the human annotators.
-	
-\paragraph{\citet{greeleyDetectingFatigueVoice2006}} Spoken sentences from six subjects containing 37 words over a 34 hour period of sleep deprivation. \todo{This reference might not be worth including, I don't understand it and the results are not clearly reported}
 
 \paragraph{\citet{fuDynamicDriverFatigue2016}} \gls{hmm} applied to biological signals for fatigue detection. Measures are \gls{eeg}, \gls{emg} and respiration. Tested during real-world driving on 12 professional driver. Drivers self-reported their state as alert, mildly fatigued or fatigued. Measured signals were processed as follows. A \gls{fft} and Butterworth band-pass filters were applied to the \gls{eeg} signal to get the power spectrum of three fatigue related frequency bands, theta, alpha and beta. \todo{probably need more here....}
 
@@ -354,121 +336,163 @@ A range of machine learning methods were tested to classify the driver attentive
  
 \paragraph{\citet{liOnlineDetectionDriver2017}} Steering wheel angles for driver fatigue detection 
 
-\paragraph{\citet{zhouPredictingDriverFatigue2021}} Explainable fatigue prediction ysubg XGBoost prediction model and SHAP for explainability.  Experiments performed in a driving simulator, with the subject performing a simple driving task before an \gls{ads} took over the driving task, with the subject supervising the \gls{ads} system but completing no additional tasks, with the intention of inducing passive fatigue as discussed by \citep{goncalvesDrowsinessConditionalAutomation2016}. \gls{perclos} was used as the ground truth signal for fatigue. Measures used for the prediction model were related to heart rate and respiratory rate, as well as \gls{ecg}, steering wheel torque and angle, and driver posture. The most important measures according to SHAP value were heart rate (averaged over 60 seconds), \gls{hrv} and breathing rate (averaged over 60 seconds). Interesting \gls{ecg} was reported as the second lowest important measure - \gls{ecg} is commonly used for fatigue detection.  
+\paragraph{\citet{zhouPredictingDriverFatigue2021}} Explainable fatigue prediction using XGBoost prediction model and SHAP for explainability.  Experiments performed in a driving simulator, with the subject performing a simple driving task before an \gls{ads} took over the driving task, with the subject supervising the \gls{ads} system but completing no additional tasks, with the intention of inducing passive fatigue as discussed by \citep{goncalvesDrowsinessConditionalAutomation2016}. \gls{perclos} was used as the ground truth signal for fatigue. Measures used for the prediction model were related to heart rate and respiratory rate, as well as \gls{ecg}, steering wheel torque and angle, and driver posture. The most important measures according to SHAP value were \gls{hr} (averaged over 60 seconds), \gls{hrv} and breathing rate (averaged over 60 seconds). Interesting \gls{ecg} was reported as the second lowest important measure - \gls{ecg} is commonly used for fatigue detection.  
 	
 
-\paragraph{\citep{koesdwiadyRecentTrendsDriver2017}} A high-level survey of driver monitoring systems. It doesn't seem great but probably provides some good references to follow up on. Discusses types of driver inattention which is useful. Introduces a taxonomy of driver distraction monitoring sources which is probably worth exploring. Main sources of driver distraction detection:
-\begin{itemize}
-	\item Driving behaviour measures, including LSTM tracking head movement \citep{wollmerOnlineDriverDistraction2011}
-	\item Physiological measures of driver (all vision based in this paper)
-	\item Hybrid methods (driving behaviour and physiological measures)
-\end{itemize}
+%\paragraph{\citep{koesdwiadyRecentTrendsDriver2017}} A high-level survey of driver monitoring systems. It doesn't seem great but probably provides some good references to follow up on. Discusses types of driver inattention which is useful. Introduces a taxonomy of driver distraction monitoring sources which is probably worth exploring. Main sources of driver distraction detection:
+%\begin{itemize}
+%	\item Driving behaviour measures, including LSTM tracking head movement \citep{wollmerOnlineDriverDistraction2011}
+%	\item Physiological measures of driver (all vision based in this paper)
+%	\item Hybrid methods (driving behaviour and physiological measures)
+%\end{itemize}
+%
+%Use of Dynamic Bayesian Networks to detect distraction via driving behaviour and eye movement \citep{liangHybridBayesianNetwork2014}
+%
+%Main sources of driver fatigue detection:
+%\begin{itemize}
+%	\item Driving behaviour measures
+%	\item Physiological measures:
+%	\begin{itemize}
+%		\item Eye and face movement
+%		\item Speech
+%		\item PERCLOS (percent of eye closure)
+%		\item Skin \citep{kurianDrowsinessDetectionUsing2014a}
+%		\item Biological signals \citep{zhangAutomatedDetectionDriver2014}
+%	\end{itemize}
+%\end{itemize}
+%
+%\paragraph{\citep{reganDriverDistractionDriver2011}} Introduces definitions and taxonomy for driver distraction and driver inattention (distinguishing between the two).
+%
+%Driver inattention is defined as `insufficient, or no attention, to activities critical for safe driving'. This is a good reference with good taxonomy etc.
+%
+%
+%\paragraph{\citep{sikanderDriverFatigueDetection2019}} Fatigue detection methods are implemented as either: bio-mathematical models, rule based, or machine learning models. Remember that fatigue is only one of the causes of driver inattention.  A good reference and source of references for fatigue related approaches.
+%
+%\begin{itemize}
+%	\item Bio-mathematical models are more relevant for workload management tasks (aircrew rotas, driver schedules etc.)
+%	\item Rule based models (like expert systems) include Fuzzy Inference Systems, e.g. \citep{aksjonovDetectionEvaluationDriver2019}
+%	\item Machine learning based implementations such as Artificial Neural Networks (ANN) or Support Vector Machines (SVM). Lots of references to consider....
+%	\begin{itemize}
+%		\item \citet{liDetectionDriverDrowsiness2013} use SVM classifier on PPG (photoplethysmography) derived HRV (heart rate variability)
+%		\item Vision based CNN approaches \citep{yuDriverDrowsinessDetection2019} and EEG based CNN approaches \citep{gaoEEGBasedSpatioTemporal2019}
+%	\end{itemize}
+%\end{itemize}
+%
+%Figure 2 in Section \textsc{V} is a very good way of representing / summarising the approaches taken in previous works.
+%
+%Separate methods from input sources.  Method exanples are:
+%\begin{itemize}
+%	\item Bio-mathematical
+%	\item Rule based
+%	\item Machine learning
+%\end{itemize}
+%
+%Example signal sources are:
+%\begin{itemize}
+%	\item Driving behaviours (steering behaviour, lane keeping, driving time)
+%	\item Driver physiological measures (heart signal, brain signal, PERCLOS, eye tracking, posture)
+%	\item Hybrids
+%\end{itemize}
 
-Use of Dynamic Bayesian Networks to detect distraction via driving behaviour and eye movement \citep{liangHybridBayesianNetwork2014}
 
-Main sources of driver fatigue detection:
-\begin{itemize}
-	\item Driving behaviour measures
-	\item Physiological measures:
-	\begin{itemize}
-		\item Eye and face movement
-		\item Speech
-		\item PERCLOS (percent of eye closure)
-		\item Skin \citep{kurianDrowsinessDetectionUsing2014a}
-		\item Biological signals \citep{zhangAutomatedDetectionDriver2014}
-	\end{itemize}
-\end{itemize}
-
-\paragraph{\citep{reganDriverDistractionDriver2011}} Introduces definitions and taxonomy for driver distraction and driver inattention (distinguishing between the two).
-
-Driver inattention is defined as `insufficient, or no attention, to activities critical for safe driving'. This is a good reference with good taxonomy etc.
-
-
-\paragraph{\citep{sikanderDriverFatigueDetection2019}} Fatigue detection methods are implemented as either: bio-mathematical models, rule based, or machine learning models. Remember that fatigue is only one of the causes of driver inattention.  A good reference and source of references for fatigue related approaches.
-
-\begin{itemize}
-	\item Bio-mathematical models are more relevant for workload management tasks (aircrew rotas, driver schedules etc.)
-	\item Rule based models (like expert systems) include Fuzzy Inference Systems, e.g. \citep{aksjonovDetectionEvaluationDriver2019}
-	\item Machine learning based implementations such as Artificial Neural Networks (ANN) or Support Vector Machines (SVM). Lots of references to consider....
-	\begin{itemize}
-		\item \citet{liDetectionDriverDrowsiness2013} use SVM classifier on PPG (photoplethysmography) derived HRV (heart rate variability)
-		\item Vision based CNN approaches \citep{yuDriverDrowsinessDetection2019} and EEG based CNN approaches \citep{gaoEEGBasedSpatioTemporal2019}
-	\end{itemize}
-\end{itemize}
-
-Figure 2 in Section \textsc{V} is a very good way of representing / summarising the approaches taken in previous works.
-
-Separate methods from input sources.  Method exanples are:
-\begin{itemize}
-	\item Bio-mathematical
-	\item Rule based
-	\item Machine learning
-\end{itemize}
-
-Example signal sources are:
-\begin{itemize}
-	\item Driving behaviours (steering behaviour, lane keeping, driving time)
-	\item Driver physiological measures (heart signal, brain signal, PERCLOS, eye tracking, posture)
-	\item Hybrids
-\end{itemize}
-
-'rPPG is less explored for driver fatigue detection'
 
 
 \subsection{Analysis}
-Use preceding sub-section as input to discuss:
-\begin{itemize}
-	\item Trends
-	\item Weaknesses
-	\item Gaps
-	\item Issues
-\end{itemize}
+\todo{need to do this!!!!}
+%\paragraph{notes}
+%Use preceding sub-section as input to discuss:
+%\begin{itemize}
+%	\item Trends
+%	\item Weaknesses
+%	\item Gaps
+%	\item Issues
+%\end{itemize}
+%
+%\paragraph{content}
+% 
 
 
-\section{Vital sign monitoring}
+\section{Vital sign monitoring} \label{sec:vital_sign}
+\todo{better introduction}
+%\paragraph{notes}
+%Discuss vital sign monitoring in a healthcare setting (personal and clinical), with a view to potential cross-overs between driver distraction and inattention monitoring and vital sign monitoring (in both directions).
+%
+%\paragraph{content}
 
-\paragraph{\citep{singhMultiResidentNonContactVital2021}} Review paper of multi-resident non-contact vital sign monitoring using radar.
+Many of the driver inattention detection methods discussed in \cref{ssec:approaches} use driver vital signs as an input. The acquisition of driver vital signs poses an number of challenges, including the expense and complexity of the sensing equipment, and the discomfort and distraction caused by contact-based sensors. These challenges also exist in healthcare settings, and so a significant body of work investigates \gls{ncvs} monitoring devices in a clinical setting, with measures including optical vibro-cardiography, audio, thermal imaging, vision and radar. This section considers a number of these works with a view towards implementing similar approaches for driver attentiveness monitoring.
 
-Applications in health care including infant monitoring, telehealth, sleep monitoring, skin allergies and burn cases.  Different none contact methods include:
-\begin{itemize}
-	\item Optical vibro-cardigraphy
-	\item audio
-	\item thermal imaging
-	\item RGB camera
-	\item ultrasound radar2
-	\item microwave radar
-\end{itemize}
-
-Figure 2 in the paper gives a simple representation of a doppler radar based system. The original paper on noninvasive microwave measurement of respiration is  \citep{linNoninvasiveMicrowaveMeasurement1975}. The basic principle of measurement is based on Doppler shift caused by movement of the subject's chest wall.  Two most commonly used radar topologies are \gls{cw} (including \gls{fmcw}) and \gls{uwb}. Advantages and disadvantages are discussed in the paper (probably good to include). Table 1 in particular is a nice summary. Discusses radar front end architectures - heterodyne vs homodyne, single vs quadrature channel.
-
-Section D gives a good overview of how radar \gls{ncvs} works. One way to increase SNR is by increasing transmission power but there are limits as this can lead to damage to tissue / harm to health etc. FInd a source for guidelines / standards / regulations / legislation?
-
-Increasing frequency reduces wavelength and increases the sensitivity to small displacements. mmWave region corresponds to frequencies between 30~GHz to 300~GHz.  Higher frequencies have numerous advantages:
-\begin{itemize}
-	\item Improved range resolution
-	\item Reduced device form factor
-	\item Improved directionality and therefore increased range
-\end{itemize}
-
-Is attenuation an issue around the 60 GHz range?
-
-Figure 5 gives an excellent view of the frequencies investigated for \gls{ncvs} in previous works
-
-
-Discuss vital sign monitoring in a healthcare setting (personal and clinical), with a view to potential cross-overs between driver distraction and inattention monitoring and vital sign monitoring (in both directions).
 \subsection{Vital signs} \label{ssec:vital_signs}
-Briefly introduce and define the key vital signs used in healthcare settings (`textbook' definitions)
-\subsection{Approaches for monitoring vital signs}
-Brief overview of existing vital sign monitoring approaches:
-\begin{itemize}
-	\item Contact based (very brief)
-	\item Non-contact based (focus)
-	\begin{itemize}
-		\item Vision based
-		\item Radar based
-		\item Other?
-	\end{itemize}
-\end{itemize}
+%
+%\paragraph{notes}
+%
+%Briefly introduce and define the key vital signs used in healthcare settings (`textbook' definitions)
+%\begin{itemize}
+%	\item \gls{hr} commonly measured using \gls{ecg}
+%	\item \gls{rr}
+%	\item \gls{spo2} commonly measured using an pulse oximeter
+%\end{itemize}
+
+\subsection{Non-contact vital sign monitoring}
+
+%\paragraph{notes}
+%Brief overview of existing vital sign monitoring approaches:
+%\begin{itemize}
+%	\item Contact based (very brief)
+%	\item Non-contact based (focus)
+%	\begin{itemize}
+%		\item Vision based
+%		\item Radar based
+%		\item Other?
+%	\end{itemize}
+%\end{itemize}
+
+\subsubsection{Radar}
+\paragraph{notes}
+The original paper on noninvasive microwave measurement of respiration is  \citep{linNoninvasiveMicrowaveMeasurement1975}.  Radar based vital sign monitoring relies on measuring the Doppler shift of the radar signal which is caused by movement of the chest wall from breathing and heart pumping. Number of different frequencies have been assessed \citep{singhMultiResidentNonContactVital2021}(include graph). Majority of work focussed on 24~Ghz but the \gls{uwb} at 24~Ghz is being phased out and will not be available after January 1, 2022 \citep{ramasubramanianMovingLegacy242018}
+
+\subsubsection{Vision}
+Vision based monitoring systems are based on \gls{rppg}, which uses a camera to measure the changes in blood volume in blood vessels under the skin. \citet{verkruysseRemotePlethysmographicImaging2008} were the first to demonstrate that \gls{ppg} signals can be acquired remotely under ambient lighting conditions using a consumer grade camera pointed at the subject's face. The patients face and a background \gls{roi} are identified. Pixel values in each color channel are spatially averaged to improve \gls{snr} at the expense of spatial resolution. 
+
+Motion artefacts are identified as disrupting readings. Green channel shows best signal for \gls{hr} detection.
+
+\paragraph{\citet{tarassenkoNoncontactVideobasedVital2014}} extended on the above work, incorporating an auto-regressive model to filter out noise caused by artificial light flicker. 
+
+\paragraph{\citet{villarroelContinuousNoncontactVital2014}} Look at neonatal intensive care setting, using the same techniques described above to monitor \gls{hr}, \gls{rr}, and \gls{spo2}. Infants in incubators. Subjects were 30 pre-term infants. Found large changes in the ambient light conditions, subject movement and no visible skin as issues with the method. Reported that, for an absolute error of 4~\gls{bpm}, there was no significant difference in the measurement differences for the vision based method and the \gls{ppg} or \gls{ecg} methods, when compared to the differences between the \gls{ppg} and \gls{ecg} measures themselves.
+
+\paragraph{\citet{villarroelNonContactVitalSign2017}} use a video camera to estimate heart rate, respiratory rate and changes in peripheral oxygen saturation in a real-world healthcare setting (patients undergoing dialysis). Two \gls{ppg} sensors are used at to different locations on the subject as a reference signal for \gls{hr} and \gls{spo2}. \gls{ecg} and a chest belt were used for \gls{rr} reference signals. System tested over 61 dialysis sessions, a total of 219.8 hours of video. The mean absolute error of the \gls{hr}, \gls{rr} and \gls{spo2} estimations were 2.8~\gls{bpm}, 2.1~\gls{bpm} and 2.5\% respectively. Note that the errors between the two reference pulse oximeters were 1.87~\gls{bpm} and 0.97\% for \gls{hr} and \gls{spo2} respectively, which is comparable to the errors in the estimated signals.  A problem with this approach is that a large number of the video sessions recorded were not suitable as inputs due to patient and camera movements, obstructed views of the patients face and medical interventions. Also doesn't work in low light.
+
+This technology is being commercialised by Lifelight \citep{suzanneLifelightXimLimited} and a number of clinical trials have been completed or are in progress. 
+
+
+%
+%\paragraph{\citep{singhMultiResidentNonContactVital2021}} Review paper of multi-resident non-contact vital sign monitoring using radar.
+%
+%Applications in health care including infant monitoring, telehealth, sleep monitoring, skin allergies and burn cases.  Different none contact methods include:
+%\begin{itemize}
+%	\item Optical vibro-cardigraphy
+%	\item audio
+%	\item thermal imaging
+%	\item RGB camera
+%	\item ultrasound radar2
+%	\item microwave radar
+%\end{itemize}
+%
+%Figure 2 in the paper gives a simple representation of a doppler radar based system. The original paper on noninvasive microwave measurement of respiration is  \citep{linNoninvasiveMicrowaveMeasurement1975}. The basic principle of measurement is based on Doppler shift caused by movement of the subject's chest wall.  Two most commonly used radar topologies are \gls{cw} (including \gls{fmcw}) and \gls{uwb}. Advantages and disadvantages are discussed in the paper (probably good to include). Table 1 in particular is a nice summary. Discusses radar front end architectures - heterodyne vs homodyne, single vs quadrature channel.
+%
+%Section D gives a good overview of how radar \gls{ncvs} works. One way to increase SNR is by increasing transmission power but there are limits as this can lead to damage to tissue / harm to health etc. FInd a source for guidelines / standards / regulations / legislation?
+%
+%Increasing frequency reduces wavelength and increases the sensitivity to small displacements. mmWave region corresponds to frequencies between 30~GHz to 300~GHz.  Higher frequencies have numerous advantages:
+%\begin{itemize}
+%	\item Improved range resolution
+%	\item Reduced device form factor
+%	\item Improved directionality and therefore increased range
+%\end{itemize}
+%
+%Is attenuation an issue around the 60 GHz range?
+%
+%Figure 5 gives an excellent view of the frequencies investigated for \gls{ncvs} in previous works
+
+
 
 \section{Gaps and opportunities}
 Highlight gaps in existing works, along with any opportunities presented by these gaps or by extending or combining existing approaches
@@ -478,7 +502,9 @@ Highlight gaps in existing works, along with any opportunities presented by thes
 	\item Many approaches require `invasive' measurement devices (at least in the context of driving a car). These are not viable in real world due to driver comfort and the risk of causing driver distraction in their own right
 	\item Many approaches use driving behaviour as an input. While this is valuable and useful as an input, it's value deteriorates with level 1 \gls{ads} and they are not usable for level 2 and level 3 systems, where both lateral and longitudinal control is by the \gls{ads}.
 	\item There a no definitive objective measures for \gls{dra} or \gls{dda} which leads to challenges when developing driver attentiveness monitoring systems. As most fatigue and distraction measures are subjective and self-reported it is challenging to attain ground truth data for training and testing. Many studies force subjects to act the symptoms of fatigue or to complete a distracting task while in a simulated environment. Not ideal...  \citep{kaidaValidationKarolinskaSleepiness2006} KSS sleepiness scale??
+	\item `rPPG is less explored for driver fatigue detection' \citet{sikanderDriverFatigueDetection2019}
 \end{itemize}
+
 
 \section{Discussion}
 \paragraph{notes}
@@ -499,9 +525,32 @@ Draw links between driver distraction/awareness and healthcare setting,highlight
 This chapter presents the objectives, specification and plan for the project
 
 \section{Aims and objectives}
+
+\paragraph{notes} Main focus of this project is the accurate and reliable extraction of vital signs using radar, suited for automotive environment.  Justified because \citet{zhouPredictingDriverFatigue2021} reported \gls{hr}, \gls{hrv} and \gls{rr} to be the most important indicators of fatigue. 
+Extension is to compare radar derived measures to \gls{rppg} measures (e.g. Lifelight)
+Extension is to determine fatigue levels from measured vital signs (classification or value based)
+Vital signs are not generally used to detect distraction. Can we use the same sensing modalities (radar and vision) to detect distraction simultaneously.
+
 \begin{itemize}
-	\item Aims as high-level intentions for the project (e.g. the proof of concept design, development and testing of an attentiveness monitoring system with possible applications in automotive and healthcare settings). Show clear connection to literature review. 
+	\item Aims as high-level intentions for the project (e.g. the proof of concept design, development and testing of a non-contact vital sign monitoring system with applications in automotive (driver attentiveness monitoring) and healthcare settings). Show clear connection to literature review. 
 	\item Overview of the objectives, probably list form. Include stretch goals.
+	\begin{itemize}
+		\item Radar based detection of \gls{hr} and \gls{rr} in dynamic environment (i.e. motions associated with driving a car)
+		\begin{itemize}
+			\item Identify target radar frequencies and device
+			\item Collection of ground truth heart rate data (\gls{ecg}) and corresponding radar data
+			\item \gls{fft} based extraction of vital signs from radar signal
+			\item \gls{lstm} based extraction of vital signs data from radar signal
+			\item Other machine learning approaches for extraction of vital signs
+		\end{itemize}
+		\item Comparison with vision based system (\gls{rppg})
+		\begin{itemize}
+			\item Multi-modal? Radar \& \gls{rppg}
+		\end{itemize}
+		\item Experimental assessment of attentiveness (passive fatigue?) (vision \& radar)
+		\item A big challenge in this project is how to quantify or assess attentiveness.
+		\item 
+	\end{itemize}
 \end{itemize}
 
 \section{Specification}
@@ -516,6 +565,8 @@ This chapter presents the objectives, specification and plan for the project
 	\item Gantt chart
 	\item Highlight and discuss milestones and deliverables
 \end{itemize}
+
+Consider contingencies and alternatives related to COVID and lockdowns.
 
 \chapter{Conclusion}
 Conclude report, highlight links from literature review to project plan.
