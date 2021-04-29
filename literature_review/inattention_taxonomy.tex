@@ -1,0 +1,73 @@
+\documentclass[]{standalone}
+\usepackage[edges,linguistics]{forest}
+\usetikzlibrary{arrows.meta}
+
+\forestset{%
+	declare boolean={fork me}{false},
+	fork my edges/.style={%
+		for tree={fork me},
+		before typesetting nodes={%
+			where fork me={forked edge}{},
+		},
+	},
+	fork me not/.style={%
+		fork me=false,
+		sn edges,
+	},
+	dir tree switch/.style args={at #1}{%
+		for tree={
+			edge=-Latex,
+			fit=rectangle,
+		},
+		where level=#1{
+			for tree={
+				folder,
+				grow'=0,
+			},
+			delay={child anchor=north},
+		}{},
+		before typesetting nodes={
+			for tree={
+				content/.wrap value={\strut ##1},
+			},
+			if={isodd(n_children("!r"))}{
+				for nodewalk/.wrap pgfmath arg={{fake=r,n=##1}{calign with current edge}}{int((n_children("!r")+1)/2)},
+			}{},
+		},
+	},
+}
+
+\begin{document}
+	\begin{forest}
+		dir tree switch=at 1,
+		fork my edges,
+		for tree={%
+			align=center,
+			where level=0{%
+				%			tikz={\draw [thick] (.children first) -- (.children last);}
+			}{}}
+		[\textbf{Driver Inattention Monitoring}
+		[Driving Behaviour, for descendants={fork me not}
+		[Steering wheel position]
+		[Steering wheel torque]
+		[Throttle position]
+		[Lane position]
+		[Speed]
+		]
+		[Driver Behaviour, for descendants={fork me not}
+		[Head movements]
+		[Eye movements]
+		[Posture]
+		[Facial expression]
+		[Voice]
+		]
+		[Driver Physiology, for descendants={fork me not}
+		[Heart rate]
+		[Respiration rate]
+		[EEG]
+		[EMG]
+		[EOG]
+		]
+		]
+	\end{forest}
+\end{document}
