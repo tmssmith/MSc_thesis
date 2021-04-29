@@ -1,3 +1,7 @@
+% !TeX document-id = {4983ff03-2248-4cb5-947e-a4cb90d994a7}
+% Magic commands to enable write18 for automating inkscape-to-latex workflow
+% !TeX TXS-program:compile = txs:///pdflatex/[--shell-escape]
+
 \documentclass[11pt, parskip=half*,twoside=false]{scrbook}
 \usepackage{todonotes}
 \usepackage{natbib}
@@ -8,6 +12,7 @@
 \usepackage[UKenglish]{datetime}
 \usepackage{graphicx}
 \graphicspath{{./images/}}
+\usepackage[mode=buildnew]{standalone} % requires -shell-escape
 
 \newdateformat{monthyear}{%
 	\monthname[\THEMONTH] \THEYEAR}
@@ -21,6 +26,9 @@
 \setlength\bibhang{0pt}
 % This package allows linebreaks in URLs, fixing a problem with long URLs in the References
 \usepackage{xurl}
+
+
+
 
 \RedeclareSectionCommand[
 runin = true,
@@ -40,6 +48,38 @@ afterskip = -1em]
 \setglossarystyle{super}
 
 \usepackage{pgfplots}
+\usepackage{pgfgantt}
+\usepackage{lscape}
+\usepackage{pdfpages}
+
+\usepackage[edges,linguistics]{forest}
+\usetikzlibrary{arrows.meta}
+%\forestset{%
+%%	colour me out/.style={outer color=#1!75, inner color=#1!50, draw=darkgray, thick, blur shadow, rounded corners},
+%%	rect/.append style={rectangle, rounded corners=2pt},
+%	dir tree switch/.style args={at #1}{%
+%		for tree={
+%			edge=-Latex,
+%%			font=\sffamily,
+%			fit=rectangle,
+%		},
+%		where level=#1{
+%			for tree={
+%				folder,
+%				grow'=0,
+%			},
+%			delay={child anchor=north},
+%		}{},
+%		before typesetting nodes={
+%			for tree={
+%				content/.wrap value={\strut ##1},
+%			},
+%			if={isodd(n_children("!r"))}{
+%				for nodewalk/.wrap pgfmath arg={{fake=r,n=##1}{calign with current edge}}{int((n_children("!r")+1)/2)},
+%			}{},
+%		},
+%	},
+%}
 
 \usepackage[noabbrev]{cleveref}
 
@@ -56,15 +96,16 @@ afterskip = -1em]
 
 \frontmatter
 
-\chapter*{Declaration}
-
-This literature review and project plan is submitted to The University of Bath in accordance with the requirements of the degree of Master of Science in Robotics and Autonomous Systems, in the Department of Electrical and Electronic Engineering. No portion of the work in this document has been submitted in support of an application for any other degree or qualification of this or any other university or institution of learning. Except where specifically acknowledged, it is the work of the author.
-
-\vskip 2cm
-\noindent\begin{tabular}{@{}p{0.5\textwidth}p{0.5\textwidth}@{}}
-	\dotfill                         & \dotfill\\
-	Thomas Smith              & Date\\
-\end{tabular} 
+\includepdf{declaration}
+%\chapter*{Declaration}
+%
+%This literature review and project plan is submitted to The University of Bath in accordance with the requirements of the degree of Master of Science in Robotics and Autonomous Systems, in the Department of Electrical and Electronic Engineering. No portion of the work in this document has been submitted in support of an application for any other degree or qualification of this or any other university or institution of learning. Except where specifically acknowledged, it is the work of the author.
+%
+%\vskip 2cm
+%\noindent\begin{tabular}{@{}p{0.5\textwidth}p{0.5\textwidth}@{}}
+%	\dotfill                         & \dotfill\\
+%	Thomas Smith              & Date\\
+%\end{tabular} 
 
 
 \addchap{Abstract}
@@ -169,7 +210,7 @@ The remainder of this document is structured as follows. \Cref{ch:litreview} pre
 This chapter focusses on the literature review. Focus is driver inattention and distraction monitoring, and non-contact vital sign measurements. \todo{improve this intro}
 
 \section{Driver inattention monitoring} \label{sec:distraction}
-Introductory text....
+\todo{Introductory text}
 
 \subsection{Overview and definitions} \label{ssec:overview}
 %\paragraph{notes}
@@ -181,6 +222,8 @@ Introductory text....
 %
 %\paragraph{content}
 
+\todo{Introductory text}
+
 \subsubsection{Driver inattention}
 \todo{Should be ok as first draft}
 In this work the term driver inattention is used according to the definition of \citet{reganDriverDistractionDriver2011} to mean `insufficient, or no attention, to activities critical for safe driving'. This inattention can stem from a number of different sources including fatigue and external distractions. The potential sources of inattention have implications for the design of an attentiveness monitoring system\textemdash an appropriate input signal detect fatigue induced inattention is likely to differ from a signal for distraction.  \citet{reganDriverDistractionDriver2011} identify five categories of driver inattention, resulting in the taxonomy presented in \cref{fig:taxonomy_inattention}. A brief discussion of these five categories is given here with the intention of identifying whether a category lends itself to monitoring via a driver attentiveness system. 
@@ -191,13 +234,13 @@ In this work the term driver inattention is used according to the definition of 
 	\caption{Taxonomy of driver inattention. Reproduced AS-IS with permission from \citep{reganDriverDistractionDriver2011}}
 	\label{fig:taxonomy_inattention}
 \end{figure}
-\todo{REPRODUCE FIGURE, REMOVE DASHED BOXES}
+\todo{Modify figure to remove dashed boxes}
 
 \paragraph{\gls{dra}} inattention caused by biological factors (e.g. fatigue) and therefore can be monitored.
 
 \paragraph{\gls{dmpa}} incorrectly paying too much attention to one area of the driving task at the expense of a second equally or more important task. Probably can't be monitored but the consequences can be mitigated through \gls{adas} systems such as automatic emergency braking or blind-spot warnings
 
-\paragraph{\gls{dna}}  \todo{Need to actually include this bit...}
+\paragraph{\gls{dna}}  \todo{Need to actually write this bit...}
 
 \paragraph{\gls{dca}} cursory attention to elements of the driver task, for example a quick glance in the rear-view mirror without fully processing the scene. Probably can't be monitored but the consequences can be mitigated through \gls{adas} systems such as automatic emergency braking or blind-spot warnings
 
@@ -208,13 +251,13 @@ Some of these definitions are nuanced, and the authors themselves acknowledge th
 \gls{dra} and some of the \gls{dda} causes of inattention could be monitored by a driver attentiveness monitoring system, and this directs the remainder of this work.  
 
 Looking at \gls{dda} in more detail, driver distraction can be classified as one or more of the following categories:
-\todo{find a reference for this?}
 \begin{itemize}
 	\item Visual distraction, where the driver's visual focus is a non-driving related subject, such as a mobile phone screen or a passenger.
 	\item Manual distraction, where a driver's feet or hands are removed from the pedals or steering wheel respectively.
 	\item Cognitive distraction, where a driver's thoughts are focussed on a task not related to the driving task, such as an involved conversation with a passenger.
 \end{itemize}
 
+Having provided definitions and a taxonomy for driver inattention we address on of the most relevant domains for driver inattention\textemdash autonomous vehicles.
 
 \subsubsection{Automated driving systems}
 \todo{Should be ok as first draft}
@@ -249,9 +292,7 @@ Levels 4 and 5 can both be considered fully autonomous and the human driver is n
 In addition to all of this, a driver monitoring system which includes monitoring of vital signs may provide valuable information to emergency response and accident investigation teams (driver is alive but deteriorating, driver was healthy before \gls{rtc} vs driver had heart attack before \gls{rtc}). 
 
 
-
 \subsection{Approaches for monitoring inattention} \label{ssec:approaches}
-\todo{tie all of this together, need to decide on structure... strucutre based on measure?}
 %
 %\paragraph{notes}
 %Present existing methods, categorise as:
@@ -277,17 +318,23 @@ In addition to all of this, a driver monitoring system which includes monitoring
 %\paragraph{content}
 A number of approaches for driver attentiveness monitoring have been proposed in the literature, using a variety of measured signals to detect the different forms of driver inattention, \gls{dra} and \gls{dda}, introduced previously. Due to the different causes and symptoms of \gls{dra} and \gls{dda} some approaches are better suited to detecting one or the other. Monitoring approaches can either be categorised according to the form(s) of driver inattention they are best suited to monitoring or according the measures that are used to assess attentiveness. This section considers the relevant literature, starting with those that investigate \gls{dda} detection before considering \gls{dra} monitoring and works that monitor both forms of driver inattention.
 
-\todo{decide what to do with this}
-is identified and discussed according to the measures used, as this is more useful because..... A taxonomy for all the measures considered in this work is shown in \cref{fig:taxonomy_measures}
+A number of measures are considered in the literature, see \cref{fig:taxonomy_measures}.
 
-\begin{figure} 
+\begin{figure}
 	\centering
-	\includegraphics[width=\textwidth]{inattention_inputs_taxonomy} 
-	\caption{Taxonomy of driver inattention measures \citep{koesdwiadyRecentTrendsDriver2017}}
+	\includestandalone{inattention_monitoring_taxonomy}
+	\caption{Taxonomy of driver inattention measures.}
 	\label{fig:taxonomy_measures}
 \end{figure}
-\todo{REPRODUCE FIGURE TO REFLECT CONTENTS OF THIS WORK}
-\todo{Present summary diagram similar to fig. 3 of \citep{koesdwiadyRecentTrendsDriver2017}}
+
+
+%\begin{figure} 
+%	\centering
+%	\includegraphics[width=\textwidth]{inattention_inputs_taxonomy} 
+%	\caption{Taxonomy of driver inattention measures \citep{koesdwiadyRecentTrendsDriver2017}}
+%	\label{fig:taxonomy_measures}
+%\end{figure}
+\todo{Include taxonomy/summary diagram similar to this figure}
 
 \subsubsection{Driver Distracted Attention monitoring}
 
@@ -583,9 +630,10 @@ Draw links between driver distraction/awareness and healthcare setting,highlight
 
 \chapter{Project Plan} \label{ch:plan}
 %\glsresetall
-This chapter presents the objectives, specification and plan for the project
+This chapter presents the objectives, specification and plan for the project, informed by the literature review of \cref{ch:litreview}.
 
 \section{Aims and objectives}
+
 
 \paragraph{notes} Main focus of this project is the accurate and reliable extraction of vital signs using radar, suited for automotive environment.  Justified because \citet{zhouPredictingDriverFatigue2021} reported \gls{hr}, \gls{hrv} and \gls{rr} to be the most important indicators of fatigue. 
 Extension is to compare radar derived measures to \gls{rppg} measures (e.g. Lifelight)
@@ -621,13 +669,67 @@ Vital signs are not generally used to detect distraction. Can we use the same se
 \end{itemize}
 
 \section{Milestones and deliverables}
-\begin{itemize}
-	\item Gantt chart
-	\item Highlight and discuss milestones and deliverables
-\end{itemize}
 
-Consider contingencies and alternatives related to COVID and lockdowns.
+A plan for the completion of the proposed project has been prepared and is shown as a Gantt chart in \cref{fig:gantt}. The first milestone is the completed planning of data collection experiments, which requires defining requirements for the dataset and identifying the hardware and software components necessary for data collection, before producing a plan for conducting data collection experiments. Next, the hardware and software components required for data collection are assembled, before data collection experiments are performed. The intention is for experiments to involve a number of subjects from different demographics, although this is subject to any COVID restrictions in place at the time.  
 
+The design, development and testing of algorithms has been structured as a series of sprints, were each sprint will deliver a viable algorithm that fulfils at least part of the relevant specification. This ensures progress towards the project objectives is being made while allowing for iterative development of the system. A total of three sprints are planned. The methods and findings of each sprint are documented and reported before moving onto the next sprint. This encourages reflection on progress to date so that approaches used in subsequent sprints are informed by findings to date.  
+
+Report drafting starts at the end of the first development sprint, reflecting the intention for sprint documentation and reporting to be incorporated into the final thesis. A thesis structure will be agreed as part of the drafting process and the project finishes with the an oral presentation and submission of the thesis.
+
+No specific contingency line has been included in the plan, but the impact of exams and COVID restrictions have been considered at each line item. Additionally, the adoption of sprints facilitates the removal or addition of sprints as time pressures mandate. 
+
+\ganttset{calendar week text={\small{\startday/\startmonth}}}
+\begin{landscape}	
+	\begin{figure}
+
+		%	\section{Timeline}	\label{app:Gantt}
+		\begin{ganttchart}[
+				hgrid,
+				vgrid={*{6}{draw=none},dotted},
+				x unit = 1.2mm,
+				y unit chart = 5.4mm,
+				time slot format=isodate,
+				title height=1,
+				milestone/.append style={xscale=2.25},
+				]{2021-05-03}{2021-09-12}
+				\gantttitlecalendar[]{month=shortname} \\
+				\gantttitlecalendar[title height=1.5,title label node/.append style={rotate=90}]{week=18}\\
+				\gantttitle[title/.style={opacity=0}]{}{0}\\ % invisible title to make room for previous higher line
+				\ganttbar{Revision}{2021-05-03}{2021-05-28} \\
+				\ganttmilestone{Exams}{2021-05-18}
+				\ganttmilestone{}{2021-05-21} \\
+				\ganttgroup{Data collection}{2021-05-10}{2021-06-27} \\
+				\ganttbar{Dataset requirements}{2021-05-10}{2021-05-30} \\
+				\ganttbar{Experiment planning}{2021-05-17}{2021-06-06} \\
+				\ganttmilestone{Experiment plan}{2021-06-06} \\
+				\ganttbar{Rig build}{2021-06-07}{2021-06-13} \\
+				\ganttmilestone{Ready for experiment}{2021-06-13} \\
+				\ganttbar{Collect data}{2021-06-14}{2021-06-27} \\
+				\ganttgroup{Development Sprints}{2021-06-21}{2021-07-17} 
+				\ganttgroup{}{2021-07-19}{2021-08-07}
+				\ganttgroup{}{2021-08-09}{2021-08-29} \\
+				\ganttbar{Implement algorithm}{2021-06-21}{2021-07-11}
+					\ganttbar{}{2021-07-19}{2021-08-01} 
+					\ganttbar{}{2021-08-09}{2021-08-22} \\
+				\ganttbar{Train \& test algorithm}{2021-07-12}{2021-07-18}
+					\ganttbar{}{2021-08-02}{2021-08-08}
+					\ganttbar{}{2021-08-23}{2021-08-29} \\
+				\ganttbar{Documentation}{2021-07-16}{2021-07-18}
+					\ganttbar{}{2021-08-06}{2021-08-08}
+					\ganttbar{}{2021-08-27}{2021-08-29} \\
+				\ganttbar{Report drafting}{2021-07-19}{2021-09-09} \\
+				\ganttmilestone{Thesis structure agreed}{2021-08-15} \\				
+				\ganttmilestone{Report first draft}{2021-08-29} \\
+				\ganttmilestone{Report final draft}{2021-09-05} \\
+				\ganttmilestone{Oral presentation}{2021-09-08} \\
+				\ganttmilestone{Thesis complete}{2021-09-10} \\				
+			\end{ganttchart}
+	
+			\caption{A Gantt chart showing the plan for completion of the proposed project. Each column marked by dashed lines represents one week.}
+			\label{fig:gantt}	
+	\end{figure}	
+
+\end{landscape}
 
 \chapter{Conclusion} \label{ch:conc}
 
